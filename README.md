@@ -22,21 +22,3 @@ SchoolProject Using Asp.net Core Web Api Using Clean Architecture Based On Code 
 8.EndPoints Of Operations
 
 9.Allow CORS
-
-10.Using Identity
-
-11.Added Authentication
-
-12.Added JWT Token And SwaggerGen
-
-13.Authorizations(Roles,Claims)
-
-14.Service Like Send (Email,Upload Image)
-
-15.Filters
-
-16.Database Operations(Views,Procedures,Functions) Endpoint
-
-17.Logs
-
-18.Unit Test (XUnit)
