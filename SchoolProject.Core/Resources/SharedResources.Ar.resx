@@ -129,11 +129,17 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
   </data>
+  <data name="DepartmentID" xml:space="preserve">
+    <value>رقم القسم</value>
+  </data>
   <data name="Id" xml:space="preserve">
     <value>المعرف</value>
   </data>
   <data name="IsExist" xml:space="preserve">
     <value>موجود</value>
+  </data>
+  <data name="IsNotExist" xml:space="preserve">
+    <value>غير موجود</value>
   </data>
   <data name="MaxLengthis100" xml:space="preserve">
     <value>الحد الأقصى لطول هذا العنصر هو 100</value>

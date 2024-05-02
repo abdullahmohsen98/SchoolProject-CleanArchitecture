@@ -17,5 +17,7 @@
         public const string BadRequest = "BadRequest";
         public const string UnprocessableEntity = "UnprocessableEntity";
         public const string Id = "Id";
+        public const string IsNotExist = "IsNotExist";
+        public const string DepartmentID = "DepartmentID";
     }
 }

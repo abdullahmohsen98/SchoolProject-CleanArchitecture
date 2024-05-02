@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using SchoolProject.Core.Bases;
 
 namespace SchoolProject.Core.Features.Students.Commanads.Models
 {
-    public class AddStudentCommand : IRequest<Bases.Response<string>>
+    public class AddStudentCommand : IRequest<Response<string>>
     {
         public string NameAr { get; set; }
         public string NameEn { get; set; }

@@ -11,31 +11,39 @@ namespace SchoolProject.Core.Features.Students.Commanads.Validators
         #region Fields
         private readonly IStudentService _studentService;
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+        private readonly IDepartmentService _departmentService;
         #endregion
 
         #region Constructors
         public AddStudentValidator(IStudentService studentService,
-                                   IStringLocalizer<SharedResources> stringLocalizer)
+                                   IStringLocalizer<SharedResources> stringLocalizer,
+                                   IDepartmentService departmentService)
         {
             ApplyValidationsRules();
             ApplyCustomValidationsRules();
             _studentService = studentService;
             _stringLocalizer = stringLocalizer;
+            _departmentService = departmentService;
         }
         #endregion
 
         #region Actions
         public void ApplyValidationsRules()
         {
+            RuleFor(s => s.Address)
+               .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.NotEmpty])
+               .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.Required])
+               .MaximumLength(10).WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.MaxLengthis100]);
+
             RuleFor(s => s.NameAr)
                 .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.Name] + _stringLocalizer[SharedResourceKeys.NotEmpty])
                 .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.Required])
                 .MaximumLength(10).WithMessage(_stringLocalizer[SharedResourceKeys.MaxLengthis100]);
 
-            RuleFor(s => s.Address)
-                .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.NotEmpty])
-                .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.Required])
-                .MaximumLength(10).WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.MaxLengthis100]);
+            RuleFor(s => s.DepartmentID)
+               .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.DepartmentID] + _stringLocalizer[SharedResourceKeys.NotEmpty])
+               .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.DepartmentID] + _stringLocalizer[SharedResourceKeys.Required]);
+
         }
 
         public void ApplyCustomValidationsRules()
@@ -47,6 +55,10 @@ namespace SchoolProject.Core.Features.Students.Commanads.Validators
             RuleFor(s => s.NameEn)
                 .MustAsync(async (Key, CancellationToken) => !await _studentService.IsNameEnExist(Key))
                 .WithMessage(_stringLocalizer[SharedResourceKeys.Name] + _stringLocalizer[SharedResourceKeys.IsExist]);
+
+            RuleFor(s => s.DepartmentID)
+                .MustAsync(async (Key, CancellationToken) => await _departmentService.IsDepartmentIdExist(Key))
+                .WithMessage(_stringLocalizer[SharedResourceKeys.IsNotExist]);
         }
         #endregion
     }
