@@ -5,6 +5,7 @@ using SchoolProject.Core.Middleware;
 using SchoolProject.Core.ModuleCoreDependencies;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Infrastructure.ModuleInfrastructureDependencies;
+using SchoolProject.Infrastructure.ServiceRegistration;
 using SchoolProject.Service.ModuleServiceDependencies;
 using System.Globalization;
 
@@ -26,7 +27,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(option =>
 #region Dependency Injection
 builder.Services.AddInfrastructureDependencies()
                 .AddServiceDependencies()
-                .AddCoreDependencies();
+                .AddCoreDependencies()
+                .AddServiceRegistration(builder.Configuration);
 #endregion
 
 #region Localization
