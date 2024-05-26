@@ -19,5 +19,14 @@
         public const string Id = "Id";
         public const string IsNotExist = "IsNotExist";
         public const string DepartmentID = "DepartmentID";
+        public const string PasswordNotEqualConfirmPassword = "PasswordNotEqualConfirmPassword";
+        public const string UserName = "UserName";
+        public const string Email = "Email";
+        public const string Password = "Password";
+        public const string ConfirmPassword = "ConfirmPassword";
+        public const string FullName = "FullName";
+        public const string EmailIsExist = "EmailIsExist";
+        public const string UserNameIsExist = "UserNameIsExist";
+        public const string FailedToAddUser = "FailedToAddUser";
     }
 }

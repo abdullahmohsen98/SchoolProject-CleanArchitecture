@@ -33,12 +33,12 @@ namespace SchoolProject.Core.Features.Students.Commanads.Validators
             RuleFor(s => s.Address)
                .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.NotEmpty])
                .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.Required])
-               .MaximumLength(10).WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.MaxLengthis100]);
+               .MaximumLength(100).WithMessage(_stringLocalizer[SharedResourceKeys.Address] + _stringLocalizer[SharedResourceKeys.MaxLengthis100]);
 
             RuleFor(s => s.NameAr)
                 .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.Name] + _stringLocalizer[SharedResourceKeys.NotEmpty])
                 .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.Required])
-                .MaximumLength(10).WithMessage(_stringLocalizer[SharedResourceKeys.MaxLengthis100]);
+                .MaximumLength(100).WithMessage(_stringLocalizer[SharedResourceKeys.MaxLengthis100]);
 
             RuleFor(s => s.DepartmentID)
                .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.DepartmentID] + _stringLocalizer[SharedResourceKeys.NotEmpty])

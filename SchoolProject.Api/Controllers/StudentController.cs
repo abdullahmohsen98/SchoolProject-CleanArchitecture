@@ -21,7 +21,7 @@ namespace SchoolProject.Api.Controllers
         }
         #endregion
 
-        #region Handle Fubctions
+        #region Handle Functions
         [HttpGet(Router.StudentRouting.List)]
         public async Task<IActionResult> GetStudentList()
         {

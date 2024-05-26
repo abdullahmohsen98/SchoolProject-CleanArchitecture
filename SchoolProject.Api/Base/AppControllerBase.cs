@@ -7,7 +7,6 @@ namespace SchoolProject.Api.Base
     [ApiController]
     public class AppControllerBase : ControllerBase
     {
-
         #region Actions
         public ObjectResult NewResult<T>(Response<T> response)
         {

@@ -123,6 +123,9 @@
   <data name="BadRequest" xml:space="preserve">
     <value>طلب غير صحيح</value>
   </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>الباسوورد التأكيدى</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>تم الإضافه بنجاح</value>
   </data>
@@ -131,6 +134,18 @@
   </data>
   <data name="DepartmentID" xml:space="preserve">
     <value>رقم القسم</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكترونى</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>الإيميل الذى أدخلته مستخدم مسبقا</value>
+  </data>
+  <data name="FailedToAddUser" xml:space="preserve">
+    <value>فشل فى إضافة المستخدم</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>الإسم بالكامل</value>
   </data>
   <data name="Id" xml:space="preserve">
     <value>المعرف</value>
@@ -153,6 +168,12 @@
   <data name="NotFound" xml:space="preserve">
     <value>غير متوفر</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>الرقم السرى</value>
+  </data>
+  <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
+    <value>الباسوورد والباسوورد المؤكد يجب أن يتطابقوا</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
@@ -167,5 +188,11 @@
   </data>
   <data name="Updated" xml:space="preserve">
     <value>تم التعديل بنجاح</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>إسم المستخدم</value>
+  </data>
+  <data name="UserNameIsExist" xml:space="preserve">
+    <value>إسم المستخدم موجود بالفعل مسبقا</value>
   </data>
 </root>
