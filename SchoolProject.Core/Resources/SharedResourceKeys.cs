@@ -30,5 +30,8 @@
         public const string FailedToAddUser = "FailedToAddUser";
         public const string UpdateFailed = "UpdateFailed";
         public const string DeletedFailed = "DeletedFailed";
+        public const string CurrentPassword = "CurrentPassword";
+        public const string NewPassword = "NewPassword";
+        public const string ChangingPasswordFailed = "ChangingPasswordFailed";
     }
 }

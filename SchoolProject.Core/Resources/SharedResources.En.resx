@@ -123,11 +123,17 @@
   <data name="BadRequest" xml:space="preserve">
     <value>This is a Bad Request</value>
   </data>
+  <data name="ChangingPasswordFailed" xml:space="preserve">
+    <value>Changing Password Failed</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>ConfirmPassword</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Created Successfully</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
   </data>
   <data name="Deleted" xml:space="preserve">
     <value>Deleted Successfully</value>
@@ -151,7 +157,7 @@
     <value>FullName</value>
   </data>
   <data name="Id" xml:space="preserve">
-    <value>Id</value>
+    <value>Id </value>
   </data>
   <data name="IsExist" xml:space="preserve">
     <value>Is Exist</value>
@@ -164,6 +170,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>Must Not Be Empty</value>

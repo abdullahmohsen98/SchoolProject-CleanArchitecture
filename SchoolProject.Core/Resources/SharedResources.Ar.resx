@@ -123,11 +123,17 @@
   <data name="BadRequest" xml:space="preserve">
     <value>طلب غير صحيح</value>
   </data>
+  <data name="ChangingPasswordFailed" xml:space="preserve">
+    <value>فشل تغيير كلمة السر</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>الباسوورد التأكيدى</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>تم الإضافه بنجاح</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>كلمة السر الحالية</value>
   </data>
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
@@ -164,6 +170,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>الإسم</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>كلمة السر الجديدة</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>لا يمكن ترك العنصر فارغ</value>
