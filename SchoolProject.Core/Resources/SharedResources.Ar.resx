@@ -189,6 +189,9 @@
   <data name="Updated" xml:space="preserve">
     <value>تم التعديل بنجاح</value>
   </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>فشل التحديث</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>إسم المستخدم</value>
   </data>
