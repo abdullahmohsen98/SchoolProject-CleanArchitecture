@@ -29,5 +29,6 @@
         public const string UserNameIsExist = "UserNameIsExist";
         public const string FailedToAddUser = "FailedToAddUser";
         public const string UpdateFailed = "UpdateFailed";
+        public const string DeletedFailed = "DeletedFailed";
     }
 }

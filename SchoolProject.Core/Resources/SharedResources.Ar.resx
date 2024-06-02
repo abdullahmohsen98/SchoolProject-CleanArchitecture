@@ -132,6 +132,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>تم الحذف بنجاح</value>
   </data>
+  <data name="DeletedFailed" xml:space="preserve">
+    <value>فشل الحذف</value>
+  </data>
   <data name="DepartmentID" xml:space="preserve">
     <value>رقم القسم</value>
   </data>
