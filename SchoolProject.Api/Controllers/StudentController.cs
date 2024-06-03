@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Base;
 using SchoolProject.Core.Features.Students.Commanads.Models;
@@ -8,6 +9,7 @@ using SchoolProject.Data.AppMetaData;
 namespace SchoolProject.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class StudentController : AppControllerBase
     {
         #region Fields
@@ -30,6 +32,7 @@ namespace SchoolProject.Api.Controllers
         }
 
         [HttpGet(Router.StudentRouting.Paginated)]
+        [AllowAnonymous]
         public async Task<IActionResult> Paginated([FromQuery] GetStudentPaginatedListQuery query)
         {
             var response = await _mediator.Send(query);

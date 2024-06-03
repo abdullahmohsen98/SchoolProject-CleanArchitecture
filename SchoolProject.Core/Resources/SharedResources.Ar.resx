@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountLocked" xml:space="preserve">
+    <value>اليوزر غير مفعل</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>الإيميل الذى أدخلته مستخدم مسبقا</value>
+  </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>البريد غير مؤكد</value>
   </data>
   <data name="FailedToAddUser" xml:space="preserve">
     <value>فشل فى إضافة المستخدم</value>
@@ -183,6 +189,9 @@
   <data name="Password" xml:space="preserve">
     <value>الرقم السرى</value>
   </data>
+  <data name="PasswordIsNotCorrect" xml:space="preserve">
+    <value>كلمة السر غير صحيحه</value>
+  </data>
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>الباسوورد والباسوورد المؤكد يجب أن يتطابقوا</value>
   </data>
@@ -209,5 +218,8 @@
   </data>
   <data name="UserNameIsExist" xml:space="preserve">
     <value>إسم المستخدم موجود بالفعل مسبقا</value>
+  </data>
+  <data name="UserNameIsNotExist" xml:space="preserve">
+    <value>إسم المستخدم هذا غير موجود</value>
   </data>
 </root>

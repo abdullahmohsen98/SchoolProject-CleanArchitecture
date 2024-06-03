@@ -1,0 +1,89 @@
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
+using SchoolProject.Core.Bases;
+using SchoolProject.Core.Features.Authentication.Commands.Models;
+using SchoolProject.Core.Resources;
+using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Service.Abstracts;
+
+namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
+{
+    public class SignInCommandHandler : ResponseHandler,
+                                        IRequestHandler<SignInCommand, Response<string>>
+    {
+        #region Fields
+        private readonly IMapper _mapper;
+        private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly ILogger<SignInCommandHandler> _logger;
+        #endregion
+
+        #region Constructors
+        public SignInCommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
+                                    IMapper mapper,
+                                    UserManager<User> userManager,
+                                    SignInManager<User> signInManager,
+                                    IAuthenticationService authenticationService,
+                                    ILogger<SignInCommandHandler> logger) : base(stringLocalizer)
+        {
+            _stringLocalizer = stringLocalizer;
+            _mapper = mapper;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _authenticationService = authenticationService;
+            _logger = logger;
+        }
+        #endregion
+
+        #region Handle Functions
+        public async Task<Response<string>> Handle(SignInCommand request, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Handling sign-in for user: {UserName}", request.UserName);
+
+            // Check if user exists
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user == null)
+            {
+                _logger.LogWarning("User not found: {UserName}", request.UserName);
+                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.UserNameIsNotExist]);
+            }
+
+            // Check if email is confirmed
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                _logger.LogWarning("Email not confirmed for user: {UserName}", request.UserName);
+                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.EmailNotConfirmed]);
+            }
+
+            // Check if the user is locked out
+            if (await _userManager.IsLockedOutAsync(user))
+            {
+                _logger.LogWarning("Account locked for user: {UserName}", request.UserName);
+                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.AccountLocked]);
+            }
+
+            // Try to sign in
+            var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+            if (!signInResult.Succeeded)
+            {
+                var reason = signInResult.IsLockedOut ? "Locked out" : signInResult.IsNotAllowed ? "Not allowed" : "Failed";
+                _logger.LogWarning("Sign-in failed for user: {UserName}. Reason: {Reason}", request.UserName, reason);
+                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.PasswordIsNotCorrect]);
+            }
+
+            // Generate token
+            var accessToken = await _authenticationService.GetJWTToken(user);
+            _logger.LogInformation("Generated JWT token for user: {UserName}", request.UserName);
+
+            // Return token
+            return Success(accessToken);
+        }
+
+        #endregion
+    }
+}

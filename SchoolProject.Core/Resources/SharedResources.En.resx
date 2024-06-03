@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountLocked" xml:space="preserve">
+    <value>Account is locked</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>Email Is Already Exist</value>
+  </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>Email is not confirmed</value>
   </data>
   <data name="FailedToAddUser" xml:space="preserve">
     <value>Failed To Add User</value>
@@ -183,6 +189,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordIsNotCorrect" xml:space="preserve">
+    <value>Password Is Not Correct</value>
+  </data>
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>Password And ConfirmPassword Are Not Equal</value>
   </data>
@@ -209,5 +218,8 @@
   </data>
   <data name="UserNameIsExist" xml:space="preserve">
     <value>User Name Is Already Exist</value>
+  </data>
+  <data name="UserNameIsNotExist" xml:space="preserve">
+    <value>User Name Is Not Exist</value>
   </data>
 </root>

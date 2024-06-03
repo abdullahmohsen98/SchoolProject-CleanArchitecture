@@ -33,5 +33,9 @@
         public const string CurrentPassword = "CurrentPassword";
         public const string NewPassword = "NewPassword";
         public const string ChangingPasswordFailed = "ChangingPasswordFailed";
+        public const string UserNameIsNotExist = "UserNameIsNotExist";
+        public const string PasswordIsNotCorrect = "PasswordIsNotCorrect";
+        public const string AccountLocked = "AccountLocked";
+        public const string EmailNotConfirmed = "EmailNotConfirmed";
     }
 }
