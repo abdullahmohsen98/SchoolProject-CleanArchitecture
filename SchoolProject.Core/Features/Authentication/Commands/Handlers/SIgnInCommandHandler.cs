@@ -7,12 +7,13 @@ using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.Authentication.Commands.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Helpers;
 using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
 {
     public class SignInCommandHandler : ResponseHandler,
-                                        IRequestHandler<SignInCommand, Response<string>>
+                                        IRequestHandler<SignInCommand, Response<JwtAuthResult>>
     {
         #region Fields
         private readonly IMapper _mapper;
@@ -41,7 +42,7 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
         #endregion
 
         #region Handle Functions
-        public async Task<Response<string>> Handle(SignInCommand request, CancellationToken cancellationToken)
+        public async Task<Response<JwtAuthResult>> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handling sign-in for user: {UserName}", request.UserName);
 
@@ -50,21 +51,21 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
             if (user == null)
             {
                 _logger.LogWarning("User not found: {UserName}", request.UserName);
-                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.UserNameIsNotExist]);
+                return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourceKeys.UserNameIsNotExist]);
             }
 
             // Check if email is confirmed
             if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 _logger.LogWarning("Email not confirmed for user: {UserName}", request.UserName);
-                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.EmailNotConfirmed]);
+                return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourceKeys.EmailNotConfirmed]);
             }
 
             // Check if the user is locked out
             if (await _userManager.IsLockedOutAsync(user))
             {
                 _logger.LogWarning("Account locked for user: {UserName}", request.UserName);
-                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.AccountLocked]);
+                return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourceKeys.AccountLocked]);
             }
 
             // Try to sign in
@@ -73,7 +74,7 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
             {
                 var reason = signInResult.IsLockedOut ? "Locked out" : signInResult.IsNotAllowed ? "Not allowed" : "Failed";
                 _logger.LogWarning("Sign-in failed for user: {UserName}. Reason: {Reason}", request.UserName, reason);
-                return BadRequest<string>(_stringLocalizer[SharedResourceKeys.PasswordIsNotCorrect]);
+                return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourceKeys.PasswordIsNotCorrect]);
             }
 
             // Generate token
