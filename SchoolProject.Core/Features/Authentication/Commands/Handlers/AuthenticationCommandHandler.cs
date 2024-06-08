@@ -12,8 +12,9 @@ using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
 {
-    public class SignInCommandHandler : ResponseHandler,
-                                        IRequestHandler<SignInCommand, Response<JwtAuthResult>>
+    public class AuthenticationCommandHandler : ResponseHandler,
+                                        IRequestHandler<SignInCommand, Response<JwtAuthResult>>,
+                                        IRequestHandler<RefreshTokenCommand, Response<JwtAuthResult>>
     {
         #region Fields
         private readonly IMapper _mapper;
@@ -21,16 +22,16 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IAuthenticationService _authenticationService;
-        private readonly ILogger<SignInCommandHandler> _logger;
+        private readonly ILogger<AuthenticationCommandHandler> _logger;
         #endregion
 
         #region Constructors
-        public SignInCommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
+        public AuthenticationCommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
                                     IMapper mapper,
                                     UserManager<User> userManager,
                                     SignInManager<User> signInManager,
                                     IAuthenticationService authenticationService,
-                                    ILogger<SignInCommandHandler> logger) : base(stringLocalizer)
+                                    ILogger<AuthenticationCommandHandler> logger) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
             _mapper = mapper;
@@ -83,6 +84,12 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Handlers
 
             // Return token
             return Success(accessToken);
+        }
+
+        public async Task<Response<JwtAuthResult>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.GetRefreshToken(request.AccessToken, request.RefreshToken);
+            return Success(result);
         }
 
         #endregion
