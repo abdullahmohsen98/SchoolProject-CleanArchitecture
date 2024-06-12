@@ -37,5 +37,10 @@
         public const string PasswordIsNotCorrect = "PasswordIsNotCorrect";
         public const string AccountLocked = "AccountLocked";
         public const string EmailNotConfirmed = "EmailNotConfirmed";
+        public const string AlgorithmIsWrong = "AlgorithmIsWrong";
+        public const string TokenIsNotExpired = "TokenIsNotExpired";
+        public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
+        public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";
+        public const string TokenIsExpired = "TokenIsExpired";
     }
 }

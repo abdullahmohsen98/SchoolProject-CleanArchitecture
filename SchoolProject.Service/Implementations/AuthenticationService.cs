@@ -55,17 +55,28 @@ namespace SchoolProject.Service.Implementations
             response.AccessToken = accessToken;
             return response;
         }
-        public async Task<JwtAuthResult> GetRefreshToken(string accessToken, string refreshToken)
+        public async Task<JwtAuthResult> GetRefreshToken(User user, JwtSecurityToken jwtToken, DateTime? expiryDate, string refreshToken)
         {
-            //Read token to get claims of user and get it's data
-            var jwtToken = ReadJWTToken(accessToken);
+            var (jwtSecurityToken, newToken) = GenerateJwtToken(user);
+
+            var response = new JwtAuthResult();
+            response.AccessToken = newToken;
+            var refreshTokenResult = new RefreshToken();
+            refreshTokenResult.UserName = jwtToken.Claims.FirstOrDefault(u => u.Type == nameof(UserClaimModel.UserName)).Value;
+            refreshTokenResult.TokenString = refreshToken;
+            refreshTokenResult.ExpiredAt = (DateTime)expiryDate;
+            response.RefreshToken = refreshTokenResult;
+            return response;
+        }
+        public async Task<(string, DateTime?)> ValidateDetails(JwtSecurityToken jwtToken, string accessToken, string refreshToken)
+        {
             if (jwtToken == null || !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature))
             {
-                throw new SecurityTokenException("Algorithm is wrong");
+                return ("AlgorithmIsWrong", null);
             }
             if (jwtToken.ValidTo > DateTime.UtcNow)
             {
-                throw new SecurityTokenException("Token is not expired");
+                return ("TokenIsNotExpired", null);
             }
             var userId = jwtToken.Claims.FirstOrDefault(u => u.Type == nameof(UserClaimModel.Id)).Value;
             var userRefreshToken = await _refreshTokenRepository.GetTableNoTracking()
@@ -75,7 +86,7 @@ namespace SchoolProject.Service.Implementations
             //Validations on token, accessToken
             if (userRefreshToken == null)
             {
-                throw new SecurityTokenException("Refresh Token is not found");
+                return ("RefreshTokenIsNotFound", null);
             }
 
             if (userRefreshToken.ExpiryDate < DateTime.UtcNow)
@@ -83,22 +94,10 @@ namespace SchoolProject.Service.Implementations
                 userRefreshToken.IsRevoked = true;
                 userRefreshToken.IsUsed = false;
                 await _refreshTokenRepository.UpdateAsync(userRefreshToken);
-                throw new SecurityTokenException("Refresh Token is expired");
+                return ("RefreshTokenIsExpired", null);
             }
-
-            //Generate refresh token
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) throw new SecurityTokenException("User is not found");
-            var (jwtSecurityToken, newToken) = GenerateJwtToken(user);
-
-            var response = new JwtAuthResult();
-            response.AccessToken = newToken;
-            var refreshTokenResult = new RefreshToken();
-            refreshTokenResult.UserName = jwtToken.Claims.FirstOrDefault(u => u.Type == nameof(UserClaimModel.UserName)).Value;
-            refreshTokenResult.TokenString = refreshToken;
-            refreshTokenResult.ExpiredAt = userRefreshToken.ExpiryDate;
-            response.RefreshToken = refreshTokenResult;
-            return response;
+            var expiryDate = userRefreshToken.ExpiryDate;
+            return (userId, expiryDate);
         }
 
         private (JwtSecurityToken, string) GenerateJwtToken(User user)
@@ -143,7 +142,7 @@ namespace SchoolProject.Service.Implementations
             };
             return claims;
         }
-        private JwtSecurityToken ReadJWTToken(string accessToken)
+        public JwtSecurityToken ReadJWTToken(string accessToken)
         {
             if (string.IsNullOrEmpty(accessToken))
             {
@@ -167,12 +166,12 @@ namespace SchoolProject.Service.Implementations
                 ValidateAudience = _jwtSettings.ValidateAudience,
                 ValidateLifetime = _jwtSettings.ValidateLifeTime,
             };
-            var validator = handler.ValidateToken(accessToken, parameters, out SecurityToken validatedToken);
             try
             {
+                var validator = handler.ValidateToken(accessToken, parameters, out SecurityToken validatedToken);
                 if (validator == null)
                 {
-                    throw new SecurityTokenException("Invalid Token");
+                    return "InvalidToken";
                 }
                 return "Success";
             }

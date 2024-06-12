@@ -123,6 +123,9 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="AlgorithmIsWrong" xml:space="preserve">
+    <value>Algorithm Is Wrong</value>
+  </data>
   <data name="BadRequest" xml:space="preserve">
     <value>This is a Bad Request</value>
   </data>
@@ -195,11 +198,23 @@
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>Password And ConfirmPassword Are Not Equal</value>
   </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>Refresh Token Is Expired</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>Refresh Token Is Not Found</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>This Field is Required</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Operation is Done</value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>Token Is Expired</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>Token Is Not Expired</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>You Are Not Authorized to Access This Resource</value>

@@ -123,6 +123,9 @@
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="AlgorithmIsWrong" xml:space="preserve">
+    <value>هناك خطأ فى الخوارزمية المستخدمه فى التشفير</value>
+  </data>
   <data name="BadRequest" xml:space="preserve">
     <value>طلب غير صحيح</value>
   </data>
@@ -195,11 +198,23 @@
   <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
     <value>الباسوورد والباسوورد المؤكد يجب أن يتطابقوا</value>
   </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>رمز التنشيط الذى تستخدمه منتهى</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>رمز التنشيط الذى تستخدمه غير موجود</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العمليه بنجاح</value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>رمز الوصول منتهى</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>رمز الوصول الذى تستخدمه ليس منتهى</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>غير مصرح لك بإستخدام هذا المصدر</value>

@@ -43,6 +43,5 @@ namespace SchoolProject.Api.Controllers
             return NewResult(response);
         }
         #endregion
-
     }
 }
