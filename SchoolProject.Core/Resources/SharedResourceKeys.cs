@@ -10,6 +10,7 @@
         public const string Updated = "Updated";
         public const string NotEmpty = "NotEmpty";
         public const string Name = "Name";
+        public const string Role = "Role";
         public const string MaxLengthis100 = "MaxLengthis100";
         public const string Address = "Address";
         public const string IsExist = "IsExist";
@@ -42,5 +43,8 @@
         public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
         public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";
         public const string TokenIsExpired = "TokenIsExpired";
+        public const string RoleName = "RoleName";
+        public const string FailedToAddRole = "FailedToAddRole";
+
     }
 }

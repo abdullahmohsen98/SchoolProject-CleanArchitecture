@@ -159,6 +159,9 @@
   <data name="EmailNotConfirmed" xml:space="preserve">
     <value>البريد غير مؤكد</value>
   </data>
+  <data name="FailedToAddRole" xml:space="preserve">
+    <value>فضل فى إضافة الصلاحيه الجديده</value>
+  </data>
   <data name="FailedToAddUser" xml:space="preserve">
     <value>فشل فى إضافة المستخدم</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>هذا الحقل مطلوب</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>الصلاحية</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العمليه بنجاح</value>

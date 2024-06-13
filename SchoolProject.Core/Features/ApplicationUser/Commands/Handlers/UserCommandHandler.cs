@@ -26,7 +26,10 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
         #endregion
 
         #region Constructors
-        public UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer, IMapper mapper, UserManager<User> userManager, ILogger<UserCommandHandler> logger) : base(stringLocalizer)
+        public UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
+                                  IMapper mapper,
+                                  UserManager<User> userManager,
+                                  ILogger<UserCommandHandler> logger) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
             _mapper = mapper;
@@ -75,6 +78,15 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
                 return BadRequest<string>(string.Join(",", createResult.Errors.Select(e => e.Description)));
             }
 
+            var users = await _userManager.Users.ToListAsync();
+            if (users.Count() > 0)
+            {
+                await _userManager.AddToRoleAsync(identityUser, "User");
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(identityUser, "Admin");
+            }
             _logger.LogInformation("User added successfully: {UserName}", request.UserName);
             return Success("User Added Successfully");
         }

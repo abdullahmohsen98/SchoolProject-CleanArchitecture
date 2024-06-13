@@ -159,6 +159,9 @@
   <data name="EmailNotConfirmed" xml:space="preserve">
     <value>Email is not confirmed</value>
   </data>
+  <data name="FailedToAddRole" xml:space="preserve">
+    <value>Failed To Add Role</value>
+  </data>
   <data name="FailedToAddUser" xml:space="preserve">
     <value>Failed To Add User</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>This Field is Required</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Operation is Done</value>
