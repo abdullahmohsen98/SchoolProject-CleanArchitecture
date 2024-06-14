@@ -8,7 +8,9 @@ using SchoolProject.Data.AppMetaData;
 namespace SchoolProject.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin,User")] // Admin or User
+    //[Authorize(Roles = "Admin")] [Authorize(Roles = "User")] // Admin and User
     public class AuthorizationController : AppControllerBase
     {
         #region Fields
@@ -26,6 +28,7 @@ namespace SchoolProject.Api.Controllers
 
         #region Handle Functions
         [HttpPost(Router.AuthorizationRouting.Create)]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Create([FromForm] AddRoleCommad command)
         {
             _logger.LogInformation("Create role received");
