@@ -29,12 +29,20 @@ namespace SchoolProject.Api.Controllers
         #region Handle Functions
         [HttpPost(Router.AuthorizationRouting.Create)]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> Create([FromForm] AddRoleCommad command)
+        public async Task<IActionResult> Create([FromForm] AddRoleCommand command)
         {
             _logger.LogInformation("Create role received");
             var response = await _mediator.Send(command);
             return NewResult(response);
         }
+        [HttpPut(Router.AuthorizationRouting.Edit)]
+
+        public async Task<IActionResult> Edit([FromBody] EditRoleCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return NewResult(response);
+        }
+
         #endregion
     }
 }

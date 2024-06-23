@@ -2,42 +2,42 @@
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Features.Authorization.Commands.Models;
 using SchoolProject.Core.Resources;
-using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Authorization.Commands.Validators
 {
-    public class AddRoleValidators : AbstractValidator<AddRoleCommand>
+    internal class EditRoleValidator : AbstractValidator<EditRoleCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
-        private readonly IAuthorizationSevice _authorizationSevice;
         #endregion
 
         #region Constructors
-        public AddRoleValidators(IStringLocalizer<SharedResources> stringLocalizer,
-                                 IAuthorizationSevice authorizationSevice)
+        public EditRoleValidator(IStringLocalizer<SharedResources> stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
-            _authorizationSevice = authorizationSevice;
             ApplyValidationsRules();
             ApplyCustomValidationsRules();
         }
         #endregion
 
-        #region Actions
+        #region Functions
         public void ApplyValidationsRules()
         {
-            RuleFor(s => s.RoleName)
+            RuleFor(s => s.Id)
+              .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.Id] + _stringLocalizer[SharedResourceKeys.NotEmpty])
+              .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.Id] + _stringLocalizer[SharedResourceKeys.Required]);
+
+            RuleFor(s => s.Name)
                .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.RoleName] + _stringLocalizer[SharedResourceKeys.NotEmpty])
-               .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.RoleName] + _stringLocalizer[SharedResourceKeys.Required]);
+               .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.RoleName] + _stringLocalizer[SharedResourceKeys.Required])
+               .MaximumLength(100).WithMessage(_stringLocalizer[SharedResourceKeys.RoleName] + _stringLocalizer[SharedResourceKeys.MaxLengthis100]);
+
         }
 
         public void ApplyCustomValidationsRules()
         {
-            RuleFor(s => s.RoleName)
-                .MustAsync(async (roleName, CancellationToken) => !await _authorizationSevice.IsRoleExist(roleName))
-                .WithMessage(_stringLocalizer[SharedResourceKeys.Role] + _stringLocalizer[SharedResourceKeys.IsExist]);
         }
         #endregion
     }
 }
+

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Service.Abstracts;
 
@@ -27,7 +28,6 @@ namespace SchoolProject.Service.Implementations
                 return "Success";
             return "Failed";
         }
-
         public async Task<bool> IsRoleExist(string roleName)
         {
             ////Check if the Role Exist or not:
@@ -38,6 +38,23 @@ namespace SchoolProject.Service.Implementations
 
             return await _roleManager.RoleExistsAsync(roleName);
         }
+        public async Task<string> EditRoleAsync(EditRoleRequest request)
+        {
+            // Check if role exist
+            var role = await _roleManager.FindByIdAsync(request.Id.ToString());
+            // if not exist return notFound
+            if (role == null) return "NotFound";
+            // Check if the name is null or empty
+            if (string.IsNullOrEmpty(request.Name)) return "InvalidName";
+            // else Edit
+            role.Name = request.Name;
+            var result = await _roleManager.UpdateAsync(role);
+            // return success
+            if (result.Succeeded) return "Success";
+            var errors = string.Join("-", result.Errors);
+            return errors;
+        }
+
         #endregion
     }
 }

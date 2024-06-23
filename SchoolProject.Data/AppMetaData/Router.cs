@@ -49,6 +49,7 @@
         {
             public const string Prefix = Rule + "AuthorizationRouting";
             public const string Create = Prefix + "/Role/Create";
+            public const string Edit = Prefix + "/Role/Edit";
         }
     }
 }

@@ -9,7 +9,9 @@ using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Authorization.Commands.Handlers
 {
-    public class RoleCommandHandler : ResponseHandler, IRequestHandler<AddRoleCommad, Response<string>>
+    public class RoleCommandHandler : ResponseHandler,
+                                      IRequestHandler<AddRoleCommand, Response<string>>,
+                                      IRequestHandler<EditRoleCommand, Response<string>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -26,12 +28,21 @@ namespace SchoolProject.Core.Features.Authorization.Commands.Handlers
         #endregion
 
         #region Handle Functions
-        public async Task<Response<string>> Handle(AddRoleCommad request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
         {
             var result = await _authorizationSevice.AddRoleAsync(request.RoleName);
             if (result == "Success") return Success("");
             return BadRequest<string>(_stringLocalizer[SharedResourceKeys.FailedToAddRole]);
         }
+        public async Task<Response<string>> Handle(EditRoleCommand command, CancellationToken cancellationToken)
+        {
+            var result = await _authorizationSevice.EditRoleAsync(command);
+            if (result == "NotFound") return NotFound<string>();
+            else if (result == "Success") return Success((string)_stringLocalizer[SharedResourceKeys.Updated]);
+            //else return BadRequest<string>(_stringLocalizer[SharedResourceKeys.UpdateFailed]);
+            else return BadRequest<string>(result);
+        }
+
         #endregion
     }
 }
