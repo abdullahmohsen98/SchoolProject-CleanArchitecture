@@ -213,6 +213,9 @@
   <data name="Role" xml:space="preserve">
     <value>Role</value>
   </data>
+  <data name="RoleInUse" xml:space="preserve">
+    <value>Role In Use</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Operation is Done</value>
   </data>

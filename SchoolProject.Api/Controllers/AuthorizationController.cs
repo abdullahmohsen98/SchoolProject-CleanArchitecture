@@ -35,11 +35,18 @@ namespace SchoolProject.Api.Controllers
             var response = await _mediator.Send(command);
             return NewResult(response);
         }
-        [HttpPut(Router.AuthorizationRouting.Edit)]
 
+        [HttpPut(Router.AuthorizationRouting.Edit)]
         public async Task<IActionResult> Edit([FromBody] EditRoleCommand command)
         {
             var response = await _mediator.Send(command);
+            return NewResult(response);
+        }
+
+        [HttpDelete(Router.AuthorizationRouting.Delete)]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var response = await _mediator.Send(new DeleteRoleCommand() { Id = id });
             return NewResult(response);
         }
 

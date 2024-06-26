@@ -9,12 +9,15 @@ namespace SchoolProject.Service.Implementations
     {
         #region Fields
         private readonly RoleManager<Role> _roleManager;
+        private readonly UserManager<User> _userManager;
         #endregion
 
         #region Constructors
-        public AuthorizationSevice(RoleManager<Role> roleManager)
+        public AuthorizationSevice(RoleManager<Role> roleManager,
+                                   UserManager<User> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
         #endregion
 
@@ -28,7 +31,7 @@ namespace SchoolProject.Service.Implementations
                 return "Success";
             return "Failed";
         }
-        public async Task<bool> IsRoleExist(string roleName)
+        public async Task<bool> IsRoleExistByName(string roleName)
         {
             ////Check if the Role Exist or not:
 
@@ -37,6 +40,13 @@ namespace SchoolProject.Service.Implementations
             //return true;
 
             return await _roleManager.RoleExistsAsync(roleName);
+        }
+        public async Task<bool> IsRoleExistById(int roleId)
+        {
+            //Check if the Role Exist or not:
+            var role = await _roleManager.FindByIdAsync(roleId.ToString());
+            if (role == null) return false;
+            return true;
         }
         public async Task<string> EditRoleAsync(EditRoleRequest request)
         {
@@ -51,6 +61,23 @@ namespace SchoolProject.Service.Implementations
             var result = await _roleManager.UpdateAsync(role);
             // return success
             if (result.Succeeded) return "Success";
+            var errors = string.Join("-", result.Errors);
+            return errors;
+        }
+        public async Task<string> DeleteRoleAsync(int roleId)
+        {
+            // Check if role exist
+            var role = await _roleManager.FindByIdAsync(roleId.ToString());
+            // if not exist return notFound
+            if (role == null) return "NotFound";
+            //Check if any user has this role
+            var users = await _userManager.GetUsersInRoleAsync(role.Name);
+            if (users.Count() > 0) return "RoleInUse";
+            // else Delete
+            var result = await _roleManager.DeleteAsync(role);
+            // return success
+            if (result.Succeeded) return "Success";
+            //Problem
             var errors = string.Join("-", result.Errors);
             return errors;
         }

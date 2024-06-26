@@ -213,6 +213,9 @@
   <data name="Role" xml:space="preserve">
     <value>الصلاحية</value>
   </data>
+  <data name="RoleInUse" xml:space="preserve">
+    <value>هذه الصلاحيه مستخدمة</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العمليه بنجاح</value>
   </data>

@@ -6,7 +6,7 @@ using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Core.Features.Authorization.Commands.Validators
 {
-    public class AddRoleValidators : AbstractValidator<AddRoleCommand>
+    public class DeleteRoleValidator : AbstractValidator<DeleteRoleCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -14,7 +14,7 @@ namespace SchoolProject.Core.Features.Authorization.Commands.Validators
         #endregion
 
         #region Constructors
-        public AddRoleValidators(IStringLocalizer<SharedResources> stringLocalizer,
+        public DeleteRoleValidator(IStringLocalizer<SharedResources> stringLocalizer,
                                  IAuthorizationSevice authorizationSevice)
         {
             _stringLocalizer = stringLocalizer;
@@ -27,16 +27,16 @@ namespace SchoolProject.Core.Features.Authorization.Commands.Validators
         #region Actions
         public void ApplyValidationsRules()
         {
-            RuleFor(s => s.RoleName)
-               .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.RoleName] + _stringLocalizer[SharedResourceKeys.NotEmpty])
-               .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.RoleName] + _stringLocalizer[SharedResourceKeys.Required]);
+            RuleFor(s => s.Id)
+               .NotEmpty().WithMessage(_stringLocalizer[SharedResourceKeys.NotEmpty])
+               .NotNull().WithMessage(_stringLocalizer[SharedResourceKeys.Required]);
         }
 
         public void ApplyCustomValidationsRules()
         {
-            RuleFor(s => s.RoleName)
-                .MustAsync(async (roleName, CancellationToken) => !await _authorizationSevice.IsRoleExist(roleName))
-                .WithMessage(_stringLocalizer[SharedResourceKeys.Role] + _stringLocalizer[SharedResourceKeys.IsExist]);
+            //RuleFor(s => s.Id)
+            //    .MustAsync(async (roleId, CancellationToken) => await _authorizationSevice.IsRoleExistById(roleId))
+            //    .WithMessage(_stringLocalizer[SharedResourceKeys.Role] + _stringLocalizer[SharedResourceKeys.IsNotExist]);
         }
         #endregion
     }
