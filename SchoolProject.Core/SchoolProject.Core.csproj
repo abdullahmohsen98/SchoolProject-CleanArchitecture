@@ -23,13 +23,11 @@
 
   <ItemGroup>
     <Folder Include="Features\Authentication\Commands\Results\" />
-    <Folder Include="Features\Authorization\Queries\Handlers\" />
-    <Folder Include="Features\Authorization\Queries\Models\" />
-    <Folder Include="Features\Authorization\Queries\Results\" />
     <Folder Include="Features\Department\Commands\Handlers\" />
     <Folder Include="Features\Department\Commands\Models\" />
     <Folder Include="Features\Department\Commands\Validators\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
+    <Folder Include="Mapping\Roles\CommandMapping\" />
   </ItemGroup>
 
 </Project>

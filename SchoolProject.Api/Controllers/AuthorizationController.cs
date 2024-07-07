@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Base;
 using SchoolProject.Core.Features.Authorization.Commands.Models;
+using SchoolProject.Core.Features.Authorization.Queries.Models;
 using SchoolProject.Data.AppMetaData;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace SchoolProject.Api.Controllers
 {
@@ -50,6 +52,20 @@ namespace SchoolProject.Api.Controllers
             return NewResult(response);
         }
 
+        [HttpGet(Router.AuthorizationRouting.RolesList)]
+        public async Task<IActionResult> GetRolesList()
+        {
+            var response = await _mediator.Send(new GetRolesListQuery());
+            return NewResult(response);
+        }
+
+        [SwaggerOperation(Summary = "Idالصلاحية عن طريق ال", OperationId = "RoleById")]
+        [HttpGet(Router.AuthorizationRouting.GetRoleByID)]
+        public async Task<IActionResult> GetRoleByID([FromRoute] int id)
+        {
+            var response = await _mediator.Send(new GetRoleByIdQuery(id));
+            return NewResult(response);
+        }
         #endregion
     }
 }
