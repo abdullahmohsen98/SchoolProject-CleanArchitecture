@@ -74,6 +74,14 @@ namespace SchoolProject.Api.Controllers
             var response = await _mediator.Send(new ManageUserRolesQuery() { UserId = userId });
             return NewResult(response);
         }
+
+        [SwaggerOperation(Summary = "تعديل صلاحيات المستخدمين", OperationId = "UpdateUserRoles")]
+        [HttpPost(Router.AuthorizationRouting.UpdateUserRoles)]
+        public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRolesCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return NewResult(response);
+        }
         #endregion
     }
 }

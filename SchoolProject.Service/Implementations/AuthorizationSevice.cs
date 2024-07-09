@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.DTOs;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Infrastructure.Data;
 using SchoolProject.Service.Abstracts;
 
 namespace SchoolProject.Service.Implementations
@@ -11,14 +12,17 @@ namespace SchoolProject.Service.Implementations
         #region Fields
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly ApplicationDBContext _dbContext;
         #endregion
 
         #region Constructors
         public AuthorizationSevice(RoleManager<Role> roleManager,
-                                   UserManager<User> userManager)
+                                   UserManager<User> userManager,
+                                   ApplicationDBContext dbContext)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
         #endregion
 
@@ -119,6 +123,41 @@ namespace SchoolProject.Service.Implementations
             }
             response.UserRoles = rolesList;
             return response;
+        }
+        public async Task<string> UpdateUserRoles(ManageUserRolesRequest request)
+        {
+            var transaction = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                //Get User
+                var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+                if (user == null) return "UserNotFound";
+
+                //Get User's OldRoles
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                //Delete User's OldRoles
+                var removeResult = await _userManager.RemoveFromRolesAsync(user, userRoles);
+                if (!removeResult.Succeeded)
+                {
+                    return "FailedToRemoveUserOldRoles";
+                }
+
+                // Add newRoles => (Roles that HasRole = True)
+                var selectedRoles = request.UserRoles.Where(UserRoles => UserRoles.HasRole).Select(userRoles => userRoles.Name);
+                var addRolesResult = await _userManager.AddToRolesAsync(user, selectedRoles);
+
+                //Return Result
+                if (!addRolesResult.Succeeded)
+                    return "FailedToAddUserNewRoles";
+                await transaction.CommitAsync();
+                return "Succeeded";
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                return "FailedToUpdateUserRoles";
+            }
         }
         #endregion
     }

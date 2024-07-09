@@ -165,6 +165,15 @@
   <data name="FailedToAddUser" xml:space="preserve">
     <value>فشل فى إضافة المستخدم</value>
   </data>
+  <data name="FailedToAddUserNewRoles" xml:space="preserve">
+    <value>فشل فى إضافة الصلاحيات الجديده للمستخدم</value>
+  </data>
+  <data name="FailedToRemoveUserOldRoles" xml:space="preserve">
+    <value>فشل فى حذف الصلاحيات القديمه للمستخدم</value>
+  </data>
+  <data name="FailedToUpdateUserRoles" xml:space="preserve">
+    <value>فشل فى تحديث صلاحيات المستخدم</value>
+  </data>
   <data name="FullName" xml:space="preserve">
     <value>الإسم بالكامل</value>
   </data>

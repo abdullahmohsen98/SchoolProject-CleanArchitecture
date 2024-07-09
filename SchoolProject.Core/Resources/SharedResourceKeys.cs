@@ -47,6 +47,8 @@
         public const string FailedToAddRole = "FailedToAddRole";
         public const string RoleInUse = "RoleInUse";
         public const string UserNotFound = "UserNotFound";
-
+        public const string FailedToRemoveUserOldRoles = "FailedToRemoveUserOldRoles";
+        public const string FailedToAddUserNewRoles = "FailedToAddUserNewRoles";
+        public const string FailedToUpdateUserRoles = "FailedToUpdateUserRoles";
     }
 }

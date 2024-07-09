@@ -54,6 +54,7 @@
             public const string RolesList = Prefix + "/Role-List";
             public const string GetRoleByID = Prefix + "/Role-By-Id/{id}";
             public const string ManageUserRoles = Prefix + "/Manage-User-Roles/{userId}";
+            public const string UpdateUserRoles = Prefix + "/Update-User-Roles";
         }
     }
 }

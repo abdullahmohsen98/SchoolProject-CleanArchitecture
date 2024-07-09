@@ -165,6 +165,15 @@
   <data name="FailedToAddUser" xml:space="preserve">
     <value>Failed To Add User</value>
   </data>
+  <data name="FailedToAddUserNewRoles" xml:space="preserve">
+    <value>Failed To Add User New Roles</value>
+  </data>
+  <data name="FailedToRemoveUserOldRoles" xml:space="preserve">
+    <value>Failed To Remove User Old Roles</value>
+  </data>
+  <data name="FailedToUpdateUserRoles" xml:space="preserve">
+    <value>Failed To Update User Roles</value>
+  </data>
   <data name="FullName" xml:space="preserve">
     <value>FullName</value>
   </data>
