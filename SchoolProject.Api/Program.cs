@@ -27,6 +27,9 @@ builder.Services.AddDbContext<ApplicationDBContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
 });
 
+// Configure Application Insights
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["ApplicationInsights:ConnectionString"]);
+
 #region Dependency Injection
 builder.Services.AddInfrastructureDependencies()
                 .AddServiceDependencies()
