@@ -246,4 +246,7 @@
   <data name="UserNameIsNotExist" xml:space="preserve">
     <value>إسم المستخدم هذا غير موجود</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>هذا المستخدم غير موجود</value>
+  </data>
 </root>

@@ -246,4 +246,7 @@
   <data name="UserNameIsNotExist" xml:space="preserve">
     <value>User Name Is Not Exist</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User Not Found</value>
+  </data>
 </root>

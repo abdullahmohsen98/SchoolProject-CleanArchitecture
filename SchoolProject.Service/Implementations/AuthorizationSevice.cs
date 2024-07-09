@@ -90,6 +90,36 @@ namespace SchoolProject.Service.Implementations
         {
             return await _roleManager.FindByIdAsync(id.ToString());
         }
+        public async Task<ManageUserRolesResult> ManageUserRolesAsync(User user)
+        {
+            var response = new ManageUserRolesResult();
+            var rolesList = new List<UserRoles>();
+
+            //Get UserRoles
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            //Get Roles
+            var roles = await _roleManager.Roles.ToListAsync();
+            response.UserId = user.Id;
+            foreach (var role in roles)
+            {
+                var userRolesList = new UserRoles();
+                userRolesList.Id = role.Id;
+                userRolesList.Name = role.Name;
+                if (userRoles.Contains(role.Name))
+                {
+                    userRolesList.HasRole = true;
+                }
+                else
+                {
+                    userRolesList.HasRole = false;
+                }
+
+                rolesList.Add(userRolesList);
+            }
+            response.UserRoles = rolesList;
+            return response;
+        }
         #endregion
     }
 }

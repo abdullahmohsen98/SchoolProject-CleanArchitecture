@@ -53,6 +53,7 @@
             public const string Delete = Prefix + "/Role/Delete/{id}";
             public const string RolesList = Prefix + "/Role-List";
             public const string GetRoleByID = Prefix + "/Role-By-Id/{id}";
+            public const string ManageUserRoles = Prefix + "/Manage-User-Roles/{userId}";
         }
     }
 }
