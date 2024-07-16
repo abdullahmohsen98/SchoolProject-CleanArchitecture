@@ -82,6 +82,14 @@ namespace SchoolProject.Api.Controllers
             var response = await _mediator.Send(command);
             return NewResult(response);
         }
+
+        [SwaggerOperation(Summary = "إدارة صلاحيات الإستخدام للمستخدمين", OperationId = "ManageUserClaims")]
+        [HttpGet(Router.AuthorizationRouting.ManageUserClaims)]
+        public async Task<IActionResult> ManageUserClaims([FromRoute] int userId)
+        {
+            var response = await _mediator.Send(new ManageUserClaimsQuery() { UserId = userId });
+            return NewResult(response);
+        }
         #endregion
     }
 }
