@@ -17,10 +17,10 @@ namespace SchoolProject.Core.Features.Students.Commanads.Validators
         public EditStudentValidator(IStudentService studentService,
                                    IStringLocalizer<SharedResources> stringLocalizer)
         {
-            ApplyValidationsRules();
-            ApplyCustomValidationsRules();
             _studentService = studentService;
             _stringLocalizer = stringLocalizer;
+            ApplyValidationsRules();
+            ApplyCustomValidationsRules();
         }
         #endregion
 
