@@ -19,11 +19,11 @@ namespace SchoolProject.Core.Features.Students.Commanads.Validators
                                    IStringLocalizer<SharedResources> stringLocalizer,
                                    IDepartmentService departmentService)
         {
-            ApplyValidationsRules();
-            ApplyCustomValidationsRules();
             _studentService = studentService;
             _stringLocalizer = stringLocalizer;
             _departmentService = departmentService;
+            ApplyValidationsRules();
+            ApplyCustomValidationsRules();
         }
         #endregion
 
