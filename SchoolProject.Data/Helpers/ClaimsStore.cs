@@ -6,9 +6,9 @@ namespace SchoolProject.Data.Helpers
     {
         public static List<Claim> claims = new()
         {
-            new Claim("Create student","false"),
-            new Claim("Edit student","false"),
-            new Claim("Delete student","false")
+            new Claim("Create Student","false"),
+            new Claim("Edit Student","false"),
+            new Claim("Delete Student","false")
         };
     }
 }
