@@ -48,8 +48,8 @@
         public static class AuthorizationRouting
         {
             public const string Prefix = Rule + "AuthorizationRouting";
-            public const string Roles = Prefix + "Role";
-            public const string Claims = Prefix + "Claim";
+            public const string Roles = Prefix + "/Role";
+            public const string Claims = Prefix + "/Claim";
             public const string Create = Roles + "/Create";
             public const string Edit = Roles + "/Edit";
             public const string Delete = Roles + "/Delete/{id}";
